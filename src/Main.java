@@ -8,18 +8,19 @@ boolean done = false;
 boolean gameOver = false;
 boolean finishmove = false;
 boolean hit;
-
+//game loop
         do {
             clearBoard();
             do {
-
+//place ships
                 placeShip(1);
                 placeShip(2);
                 placeShip(3);
                 placeShip(4);
-
+//display board
                 display();
                 do {
+                    //get hit or miss player move
                     hit = playerMove();
                     System.out.println(hit);
                     display();
@@ -57,7 +58,7 @@ boolean hit;
         int validCounter =0;
         int row=0;
         int col=0;
-
+//placing ships
         if(vertOrHorz ==0){
             do{
                 validCounter=0;
@@ -97,6 +98,7 @@ boolean hit;
     }
 
     private static void display(){
+        //unicode
         String boat ="\u26F5";
         String hit ="\uD83D\uDD25";
         String miss = "\uD83D\uDEAB";
@@ -125,6 +127,7 @@ boolean hit;
         System.out.println();
         for(int row=0; row<ROW;row++){
             System.out.print("|");
+            //filling in the board
             if(row== 9){
                 System.out.print(row+1+"  ");
 
@@ -158,6 +161,7 @@ boolean hit;
 
     }
     private static boolean playerMove(){
+        //get player move and hit or miss
     boolean isHit;
     int row;
     String AlphaCol = "";
