@@ -4,17 +4,39 @@ public class Main {
     private static int COL =10;
     private static String [][] board = new String[ROW][COL];
     public static void main(String[] args) {
+boolean done = false;
+boolean gameOver = false;
+boolean finishmove = false;
+boolean hit;
 
-        clearBoard();
+        do {
+            clearBoard();
+            do {
 
-        placeShip(1);
-        placeShip(2);
-        placeShip(3);
-        placeShip(4);
+                placeShip(1);
+                placeShip(2);
+                placeShip(3);
+                placeShip(4);
 
-        display();
+                display();
+                do {
+                    hit = playerMove();
+                    System.out.println(hit);
+                    display();
 
-    }
+                }while(!finishmove);
+
+            }while(!done);
+
+        }while(!gameOver);
+
+        }
+
+
+
+
+
+
 
 
 
@@ -76,6 +98,8 @@ public class Main {
 
     private static void display(){
         String boat ="\u26F5";
+        String hit ="\uD83D\uDD25";
+        String miss = "\uD83D\uDEAB";
 
         String wave = "\uD83C\uDF0A";
         System.out.print("      ");
@@ -111,11 +135,18 @@ public class Main {
             System.out.print("|");
 
             for(int col=0;col<COL;col++){
-                if(board[row][col].equals("-")){
-                    System.out.print(wave + " ");
+
+
+                if (board[row][col].equals("hit")){
+                    System.out.print(hit + " ");
                 }
-                else if (board[row][col].equals("ship")){
-                    System.out.print(boat + " ");
+                else if (board[row][col].equals("miss")){
+                    System.out.print(miss + " ");
+
+
+                }
+                else {
+                    System.out.print(wave + " ");
                 }
 
 
@@ -125,6 +156,68 @@ public class Main {
             System.out.println();
         }
 
+    }
+    private static boolean playerMove(){
+    boolean isHit;
+    int row;
+    String AlphaCol = "";
+        Scanner in = new Scanner(System.in);
+        do {
+            System.out.println("whats your move?");
+            row = safeinput.getIntRange(in, "row: ", 1, 10);
+            row--;
+            System.out.println("whats your col move");
+            AlphaCol = safeinput.getRegExString(in, "col: ", "[aAbBcCdDeEfFgGhHiIjJ]");
+            AlphaCol = AlphaCol.toUpperCase();
+            int col = 0;
+            switch (AlphaCol) {
+                case "A":
+                    col = 0;
+                    break;
+                case "B":
+                    col = 1;
+                    break;
+                case "C":
+                    col = 2;
+                    break;
+                case "D":
+                    col = 3;
+                    break;
+                case "E":
+                    col = 4;
+                    break;
+                case "F":
+                    col = 5;
+                    break;
+                case "G":
+                    col = 6;
+                    break;
+                case "H":
+                    col = 7;
+                    break;
+                case "I":
+                    col = 8;
+                    break;
+                case "J":
+                    col = 9;
+                    break;
+
+            }
+            if (board[row][col].equals("-")) {
+                board[row][col] = "miss";
+                System.out.println("that was a miss");
+                isHit = false;
+                return isHit;
+            } else if (board[row][col].equals("ship")) {
+                board[row][col] = "hit";
+                System.out.println("that was a hit");
+                isHit = true;
+                return isHit;
+            } else {
+                System.out.println("you've already occupied that area of ocean");
+            }
+
+        }while(true);
     }
 
 }
