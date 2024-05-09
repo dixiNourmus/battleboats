@@ -61,6 +61,7 @@ boolean hit;
 //placing ships
         if(vertOrHorz ==0){
             do{
+                //vertical ship
                 validCounter=0;
                 row = rnd.nextInt(10 - ship);
                 col = rnd.nextInt(10 - ship +1);
@@ -79,6 +80,7 @@ boolean hit;
         else{
 
             do{
+                //horizontil ship
                 validCounter =0;
                 row = rnd.nextInt(10 - ship + 1);
                 col = rnd.nextInt(10 - ship);
@@ -105,6 +107,7 @@ boolean hit;
 
         String wave = "\uD83C\uDF0A";
         System.out.print("      ");
+        //the unicode for the letters on top of board
         System.out.print("\uFF21"+" "); //A
 
         System.out.print("\uFF22"+" "); //B
@@ -207,17 +210,22 @@ boolean hit;
                     break;
 
             }
+            //its a miss
             if (board[row][col].equals("-")) {
                 board[row][col] = "miss";
                 System.out.println("that was a miss");
                 isHit = false;
                 return isHit;
-            } else if (board[row][col].equals("ship")) {
+            }
+            //its a hit
+            else if (board[row][col].equals("ship")) {
                 board[row][col] = "hit";
                 System.out.println("that was a hit");
                 isHit = true;
                 return isHit;
-            } else {
+            }
+            //allready been there
+            else {
                 System.out.println("you've already occupied that area of ocean");
             }
 
